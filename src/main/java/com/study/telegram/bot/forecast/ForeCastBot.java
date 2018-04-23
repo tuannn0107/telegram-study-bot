@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
+import org.telegram.telegrambots.api.objects.Location;
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.api.objects.replykeyboard.InlineKeyboardMarkup;
@@ -28,16 +29,15 @@ public class ForeCastBot extends TelegramLongPollingBot implements TelegramBot {
     public void onUpdateReceived(Update update) {
         Message messagereceived = update.getMessage();
         SendMessage sendMessage = new SendMessage();
-
-        if (update.getCallbackQuery() == null) {
-
-        }
-        else {
-
+        String dateSelected = dateUtils.convertDateToString(new Date(), "ddMMyyyy");
+        if (update.getCallbackQuery() != null) {
+            dateSelected = update.getCallbackQuery().getData();
+            update.getMessage().getLocation();
         }
 
-
-
+        /** get fore cast */
+        Location localtion = update.getMessage().getLocation();
+        logger.info("Reveived message from location " + localtion.toString());
 
         sendMessage.setText("You sent the message : " + messagereceived.getText());
         sendMessage.setChatId(messagereceived.getChatId());
