@@ -35,18 +35,22 @@ public class ForeCastBot extends TelegramLongPollingBot implements TelegramBot {
             update.getMessage().getLocation();
         }
 
-        /** get fore cast */
+        // get forecast from api base on client location
         Location localtion = update.getMessage().getLocation();
         logger.info("Reveived message from location " + localtion.toString());
 
-        sendMessage.setText("You sent the message : " + messagereceived.getText());
+        // set forecast result to send to client
+        sendMessage.setText("Your location is Da Nang. \n The weather is hot");
         sendMessage.setChatId(messagereceived.getChatId());
 
+        // set list day to client
         InlineKeyboardMarkup inlineMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowsInline = new ArrayList<List<InlineKeyboardButton>>();
         List<InlineKeyboardButton> listDayForecast = buildListDayForecast();
         rowsInline.add(listDayForecast);
         sendMessage.setReplyMarkup(inlineMarkup);
+
+        // send message to client
         try {
             execute(sendMessage);
         } catch (TelegramApiException e) {
