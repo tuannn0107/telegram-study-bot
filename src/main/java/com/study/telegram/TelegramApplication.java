@@ -1,6 +1,6 @@
 package com.study.telegram;
 
-import com.study.telegram.bot.forecast.BittrexPredictChannelBot;
+import com.study.telegram.bot.bittrex.BittrexPredictChannelBot;
 import com.study.telegram.bot.forecast.ForeCastBot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -20,8 +20,8 @@ public class TelegramApplication implements  CommandLineRunner{
 
     @Override
     public void run(String... args) throws Exception {
-        TelegramBotsApi botsApi = new TelegramBotsApi();
-        botsApi.registerBot(bittrexPredictChannelBot);
+        //TelegramBotsApi botsApi = new TelegramBotsApi();
+        //botsApi.registerBot(bittrexPredictChannelBot);
     }
 
     public static void main(String[] args) {

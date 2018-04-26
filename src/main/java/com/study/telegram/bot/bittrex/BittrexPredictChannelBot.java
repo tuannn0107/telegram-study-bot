@@ -1,6 +1,6 @@
-package com.study.telegram.bot.forecast;
+package com.study.telegram.bot.bittrex;
 
-import com.study.telegram.bot.TelegramBot;
+import com.study.telegram.bot.forecast.ForeCastBot;
 import com.study.telegram.constants.Constants;
 import com.study.telegram.constants.MessageConstants;
 import com.study.telegram.utils.DateUtils;
@@ -15,7 +15,7 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 
 @Component
-public class BittrexPredictChannelBot extends TelegramLongPollingBot implements TelegramBot {
+public class BittrexPredictChannelBot extends TelegramLongPollingBot {
     private static Logger logger = LoggerFactory.getLogger(ForeCastBot.class);
 
     @Autowired
