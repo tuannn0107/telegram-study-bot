@@ -1,21 +1,30 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
-import {ConstantsRouting} from "./shares/utilities/constants-routing";
+import { ConstantsRouting } from "./shares/utilities/constants-routing";
+import { Routes, RouterModule } from '@angular/router';
+import { SelectivePreloadingStrategy } from "./selective-preloading-strategy";
+import { CanDeactivateGuard } from "./can-deactivate-guard.service";
 
-const routes: Routes = [
-  { path: ConstantsRouting.RoutingRoot.BOT, loadChildren: './modules/bot-management/bot-management.module#BotManagementModule'},
-  { path: ConstantsRouting.RoutingRoot.CHANNEL, loadChildren: './modules/channel-management/channel-management.module#ChannelManagementModule'},
-  { path: ConstantsRouting.RoutingRoot.POST, loadChildren: './modules/post-management/post-management.module#PostManagementModule'},
-  { path: '', redirectTo: '', pathMatch: 'full' }
+const appRoutes: Routes = [
+  { path: ConstantsRouting.RoutingRoot.BOT, loadChildren: 'app/modules/bot-management/bot-management.module#BotManagementModule', data: { preload: true }},
+  { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{
-    // preload all modules; optionally we could
-    // implement a custom preloading strategy for just some
-    // of the modules (PRs welcome 😉)
-    preloadingStrategy: PreloadAllModules
-  })],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(
+      appRoutes,
+      {
+        enableTracing: true, // <-- debugging purposes only
+        preloadingStrategy: SelectivePreloadingStrategy
+      }
+    )
+  ],
+  exports: [
+    RouterModule
+  ],
+  providers: [
+    CanDeactivateGuard,
+    SelectivePreloadingStrategy
+  ]
 })
 export class AppRoutingModule { }
