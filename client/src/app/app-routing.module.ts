@@ -5,8 +5,9 @@ import { SelectivePreloadingStrategy } from "./selective-preloading-strategy";
 import { CanDeactivateGuard } from "./can-deactivate-guard.service";
 
 const appRoutes: Routes = [
-  { path: ConstantsRouting.RoutingRoot.BOT, loadChildren: 'app/modules/bot-management/bot-management.module#BotManagementModule', data: { preload: true }},
-  { path: '', redirectTo: '/login', pathMatch: 'full' }
+  { path: ConstantsRouting.RoutingRoot.POST, loadChildren: 'app/modules/post-management/post-management.module#PostManagementModule'},
+  { path: ConstantsRouting.RoutingRoot.BOT, loadChildren: 'app/modules/bot-management/bot-management.module#BotManagementModule'},
+  { path: '', redirectTo: '/post-management', pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -14,7 +15,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       {
-        enableTracing: true, // <-- debugging purposes only
+        enableTracing: false, // <-- debugging purposes only
         preloadingStrategy: SelectivePreloadingStrategy
       }
     )

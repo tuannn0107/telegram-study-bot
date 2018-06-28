@@ -3,13 +3,12 @@ import { NgModule } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { BotManagementModule } from './modules/bot-management/bot-management.module';
-import { ChannelManagementModule } from './modules/channel-management/channel-management.module';
 import { AppRoutingModule } from "./app-routing.module";
 import { LoginModule } from './modules/login/login.module';
 import { HeaderComponent } from './shares/layouts/header/header.component';
 import { FooterComponent } from './shares/layouts/footer/footer.component';
-import { PostManagementModule } from './modules/post-management/post-management.module';
+import {CommonModule} from "@angular/common";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -19,11 +18,10 @@ import { PostManagementModule } from './modules/post-management/post-management.
   ],
   imports: [
     BrowserModule,
-    BotManagementModule,
-    ChannelManagementModule,
+    CommonModule,
     LoginModule,
-    PostManagementModule,
     AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

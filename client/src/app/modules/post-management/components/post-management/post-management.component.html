@@ -1,7 +1,29 @@
-<mat-paginator [length]="100"
-               [pageSize]="10"
-               [pageSizeOptions]="[5, 10, 25, 100]">
-</mat-paginator>
-
-
-
+<table datatable class="row-border hover">
+  <thead>
+    <tr>
+      <th>No</th>
+      <th width="15%">Title</th>
+      <th width="10%">Bot</th>
+      <th width="10%">Channel</th>
+      <th width="35%">Message</th>
+      <th width="10%">Create date</th>
+      <th width="10%">Last public</th>
+      <th width="5%">Option</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let post of listPost; let i = index">
+      <td>{{i+1}}</td>
+      <td>{{post.title}}</td>
+      <td>{{post.bot.name}}</td>
+      <td>{{post.channel.name}}</td>
+      <td>{{post.message.content}}</td>
+      <td>{{post.createDate | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+      <td>{{post.lastPublic | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+      <td>
+        <a [routerLink]=['./view-post:post.id']><i class="fa fa-edit"></i></a> &nbsp;
+        <a [routerLink]=['./edit-post:post.id']><i class="fa fa-info-circle"></i></a>
+      </td>
+    </tr>
+  </tbody>
+</table>

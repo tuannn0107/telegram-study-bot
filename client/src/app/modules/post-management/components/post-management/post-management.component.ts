@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Post} from "../../../../models/post";
+import {PostManagementService} from "../../services/post-management.service";
+
+declare const jQuery: any;
 
 @Component({
   selector: 'app-post-management',
@@ -8,10 +11,22 @@ import {Post} from "../../../../models/post";
 })
 export class PostManagementComponent implements OnInit {
   post: Post;
+  listPost = new Array<Post>();
 
-  constructor() { }
+  constructor(
+    private postManagementService: PostManagementService
+  ) { }
 
   ngOnInit() {
+    this.getListPost();
+  }
+
+  getListPost()
+  {
+    this.postManagementService.getPostList().subscribe(data => {
+      console.log('list post ' + data);
+      this.listPost = data;
+    })
   }
 
 }
